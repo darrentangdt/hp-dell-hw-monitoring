@@ -1,0 +1,169 @@
+{{template "detailHeader.html" .}}
+
+<!-- Page Content -->
+<div id="page-content-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <table class="table table-hover">
+        {{if .hpSystem}}
+        <thead>
+          <tr>
+            <th>버전</th>
+            <th>제조사</th>
+            <th>모델</th>
+            <th>서버 이름</th>
+            <th>전원</th>
+            <th>프로세서</th>
+            <th>프로세서 상태</th>
+            <th>SKU</th>
+            <th>헬스</th>
+            <th>상태</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{.hpSystem.VersionString}}</td>
+            <td>{{.hpSystem.Manufacturer}}</td>
+            <td>{{.hpSystem.Model}}</td>
+            <td>{{.hpSystem.Name}}</td>
+            <td>
+              {{if eq .hpSystem.Power "On"}}
+              <span class="label label-success">
+              {{else}}
+              <span class="label label-danger">
+              {{end}}
+              {{.hpSystem.Power}}
+              </span>
+            </td>
+            <td>{{.hpSystem.ProcessorFamily}}</td>
+            <td>
+              {{if eq .hpSystem.HealthRollUp "OK"}}
+              <span class="label label-success">
+              {{else if eq .hpSystem.HealthRollUp "Warning"}}
+              <span class="label label-warning">
+              {{else}}
+              <span class="label label-danger">
+              {{end}}
+              {{.hpSystem.HealthRollUp}}
+              </span>
+            </td>
+            <td>{{.hpSystem.SKU}}</td>
+            <td>
+              {{if eq .hpSystem.Health "OK"}}
+              <span class="label label-success">
+              {{else if eq .hpSystem.Health "Warning"}}
+              <span class="label label-warning">
+              {{else}}
+              <span class="label label-danger">
+              {{end}}
+              {{.hpSystem.Health}}
+              </span>
+            </td>
+            <td>
+              {{if eq .hpSystem.State "Enabled"}}
+              <span class="label label-success">
+              {{else}}
+              <span class="label label-danger">
+              {{end}}
+              {{.hpSystem.State}}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+        {{else}}
+        <thead>
+          <tr>
+            <th>제조사</th>
+            <th>모델</th>
+            <th>전원</th>
+            <th>프로세서 모델</th>
+            <th>프로세서 수</th>
+            <th>프로세서 헬스</th>
+            <th>프로세서 상태</th>
+            <th>SKU</th>
+            <th>시리얼 넘버</th>
+
+            <th>시스템 메모리GiB</th>
+
+            <th>메모리 헬스</th>
+            <th>메모리 상태</th>
+            <th>헬스</th>
+            <th>상태</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{.dellSystem.Manufacturer}}</td>
+            <td>{{.dellSystem.Model}}</td>
+            <td>
+              {{if eq .dellSystem.PowerState "On"}}
+              <span class="label label-success">
+              {{else}}
+              <span class="label label-danger">
+              {{end}}
+              {{.dellSystem.PowerState}}
+              </span>
+            </td>
+            <td>{{.dellSystem.ProcessorModel}}</td>
+            <td>{{.dellSystem.ProcessorCount}}</td>
+            <td>
+              {{if eq .dellSystem.ProcessorHealth "OK"}}
+              <span class="label label-success">
+              {{else if eq .dellSystem.Health "Warning"}}
+              <span class="label label-warning">
+              {{else}}
+              <span class="label label-danger">
+              {{end}}
+              {{.dellSystem.ProcessorHealth}}
+              </span>
+            </td>
+            <td>
+              {{if eq .dellSystem.ProcessorState "Enabled"}}
+              <span class="label label-success">
+              {{else}}
+              <span class="label label-danger">
+              {{end}}
+              {{.dellSystem.ProcessorState}}
+              </span>
+            </td>
+
+            <td>{{.dellSystem.SKU}}</td>
+            <td>{{.dellSystem.SerialNumber}}</td>
+
+            <td>{{.dellSystem.TotalSystemMemoryGiB}}</td>
+            <td>{{.dellSystem.MemoryHealth}}</td>
+            <td>{{.dellSystem.MemoryState}}</td>
+
+            <td>
+              {{if eq .dellSystem.Health "OK"}}
+              <span class="label label-success">
+              {{else if eq .dellSystem.Health "Warning"}}
+              <span class="label label-warning">
+              {{else}}
+              <span class="label label-danger">
+              {{end}}
+              {{.dellSystem.Health}}
+              </span>
+            </td>
+            <td>
+              {{if eq .dellSystem.State "Enabled"}}
+              <span class="label label-success">
+              {{else}}
+              <span class="label label-danger">
+              {{end}}
+              {{.dellSystem.State}}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+        {{end}}
+      </table>
+    </div>
+  </div>
+</div>
+<!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+{{template "detailFooter.html" .}}

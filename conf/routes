@@ -1,0 +1,41 @@
+# Routes Config
+#
+# This file defines all application routes (Higher priority routes first)
+#
+
+module:testrunner
+# module:jobs
+
+
+GET     /                                       App.Monitor
+WS      /monitor/socket                         App.MonitorSocket
+GET     /server                                 App.Server
+POST    /server/add                             App.AddServer
+GET		/server/delete/:monitorId				App.DelServer
+GET     /alarm                                  App.Alarm
+POST    /alarm                                  App.AddAlarm
+GET     /alarm/log                              App.AlarmLogView
+GET     /alarm/delete/:alarmId                  App.DelAlarm
+GET     /alarm/input/:alarmId                   App.UpdateAlarmWeb
+POST    /alarm/submit                           App.UpdateAlarmSubmit
+
+GET     /dummy                                  App.Dummy
+GET     /control/:monitorHost/:pwrCtl           App.ControlServer
+GET     /update/input/:monitorId                App.UpdateServer
+POST    /update/submit                          App.UpdateSubmit
+
+GET     /detail/system/:monitorId               Detail.System
+GET     /detail/fan/:monitorId                  Detail.Fan
+GET     /detail/power/:monitorId                Detail.Power
+GET     /detail/temperature/:monitorId          Detail.Temperature
+GET     /detail/network/:monitorId              Detail.Network
+GET     /detail/storage/:monitorId              Detail.Storage
+GET     /detail/powercontrol/:monitorId         Detail.PowerControl
+# Ignore favicon requests
+GET     /favicon.ico                            404
+
+# Map static resources from the /app/public folder to the /public path
+GET     /public/*filepath                       Static.Serve("public")
+
+# Catch all
+*       /:controller/:action                    :controller.:action

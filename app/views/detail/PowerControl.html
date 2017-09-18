@@ -1,0 +1,47 @@
+{{template "detailHeader.html" .}}
+
+<!-- Page Content -->
+<div id="page-content-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-4"></div>
+      <div class="col-sm-4">
+        {{if eq .monitor.Power "On"}} 
+        <div align="center">
+          <div class="alert alert-danger">
+            <strong><h1>종료하시겠습니까</h1></strong>
+            <div class="row">
+              <div class="col-sm-6" align="right">
+                <form action="{{url "App.ControlServer" .monitor.Host "off"}}">
+                  <button type="submit" class="btn btn-danger btn-xs"><h3>종료<h3></button>
+                      </a>
+                    </form>
+                  </div>
+                  <div class="col-sm-6" align="left">
+                    <form action="{{url "App.ControlServer" .monitor.Host "reset"}}">
+                      <button type="submit" class="btn btn-danger btn-xs"><h3>리셋<h3></button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {{else}}
+                <div align="center">
+                  <div class="alert alert-danger">
+                    <strong><h1>전원을 켜시겠습니까</h1></strong> 
+                    <form action="{{url "App.ControlServer" .monitor.Host "on"}}">
+                      <button type="submit" class="btn btn-danger btn-xs"><h1>확인</h1></button>
+                    </form>
+                  </div>
+                </div>
+                {{end}}
+              </div>
+              <div class="col-sm-4"></div>
+            </div>
+          </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+        <!-- /#wrapper -->
+
+        {{template "detailFooter.html" .}}

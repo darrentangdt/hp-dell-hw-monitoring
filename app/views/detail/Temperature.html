@@ -1,0 +1,112 @@
+{{template "detailHeader.html" .}}
+
+<!-- Page Content -->
+<div id="page-content-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <table class="table table-hover">
+        {{if .hpTemperatures}}
+        <thead>
+          <tr>
+            <th>이름</th>
+            <th>위치</th>
+            <th>온도</th>
+            <th>번호</th>
+            <th>X좌표</th>
+            <th>Y좌표</th>
+            <th>타입</th>
+            <th>헬스</th>
+            <th>상태</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{range $temperature := .hpTemperatures}}
+          <tr>
+            <td>{{$temperature.Name}}</td>
+            <td>{{$temperature.Context}}</td>
+            <td>{{$temperature.CurrentReading}}</td>
+            <td>{{$temperature.Number}}</td>
+            <td>{{$temperature.LocationXmm}}</td>
+            <td>{{$temperature.LocationYmm}}</td>
+            <td>{{$temperature.Type}}</td>
+            <td>
+              {{if eq $temperature.Health "OK"}}
+              <span class="label label-success">
+              {{else if eq $temperature.Health "Warning"}}
+              <span class="label label-warning">
+              {{else if eq $temperature.Health ""}}
+              <span class="label">
+              {{else}}
+              <span class="label label-danger">
+              {{end}}
+              {{$temperature.Health}}
+              </span>
+            </td>
+            <td>
+              {{if eq $temperature.State "Enabled"}}
+              <span class="label label-success">
+              {{else if eq $temperature.State "Absent"}}
+              <span class="label label-warning">
+              {{else}}
+              <span class="label label-danger">
+              {{end}}
+              {{$temperature.State}}
+              </span>
+            </td>
+          </tr>
+          {{end}}
+        </tbody>
+        {{else}}
+        <thead>
+          <tr>
+            <th>이름</th>
+            <th>위치</th>
+            <th>온도</th>
+            <th>헬스</th>
+            <th>상태</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{range $temperature := .dellTemperatures}}
+          <tr>
+            <td>{{$temperature.Name}}</td>
+            <td>{{$temperature.PhysicalContext}}</td>
+            <td>{{$temperature.ReadingCelsius}}</td>
+            <td>
+              {{if eq $temperature.Health "OK"}}
+              <span class="label label-success">
+              {{else if eq $temperature.Health "Warning"}}
+              <span class="label label-warning">
+              {{else if eq $temperature.Health ""}}
+              <span class="label">
+              {{else}}
+              <span class="label label-danger">
+              {{end}}
+              {{$temperature.Health}}
+              </span>
+            </td>
+            <td>
+              {{if eq $temperature.State "Enabled"}}
+              <span class="label label-success">
+              {{else if eq $temperature.State "Absent"}}
+              <span class="label label-warning">
+              {{else}}
+              <span class="label label-danger">
+              {{end}}
+              {{$temperature.State}}
+              </span>
+            </td>
+          </tr>
+          {{end}}
+        </tbody>
+        {{end}}
+      </table>
+    </div>
+  </div>
+</div>
+<!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+{{template "detailFooter.html" .}}

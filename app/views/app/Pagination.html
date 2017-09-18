@@ -1,0 +1,123 @@
+{{template "header.html" .}}
+
+<!-- Page Content -->
+<div class="container">
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" href="#collapse1">감시 서버 검색</a>
+        </h4>
+      </div>
+      <div id="collapse1" class="panel-collapse collapse">
+        <form class="form-horizontal">
+          <div class="panel-body">
+            <div class="form-group">
+              <label class="control-label col-lg-2" for="ip">호스트 :</label>
+              <div class="col-lg-4"><input type="text" class="form-control" placeholder="Enter ip" name="ip"></div>
+              <label class="control-label col-lg-2" for="optradio1">상태 :</label>
+              <label class="radio-inline"><input type="radio" value="all" name="optradio1" checked="checked">All</label>
+              <label class="radio-inline"><input type="radio" value="ok" name="optradio1">OK</label>
+              <label class="radio-inline"><input type="radio" value="warning" name="optradio1">Warning</label>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-lg-2" for="sel">서비스 :</label>
+              <div class="col-lg-4">
+                <select class="form-control" id="sel" name="sel">
+                  <option>Select</option>
+                  <option>Tmap</option>
+                  <option>Tview</option>
+                </select>
+              </div>
+              <label class="control-label col-lg-2" for="optradio2">전원 :</label>
+              <label class="radio-inline"><input type="radio" value="all" name="optradio2" checked="checked">All</label>
+              <label class="radio-inline"><input type="radio" value="on" name="optradio2">ON</label>
+              <label class="radio-inline"><input type="radio" value="off" name="optradio2">OFF</label>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-lg-2" for="manager">담당자 :</label>
+              <div class="col-lg-4"><input type="manager" class="form-control" id="manager" placeholder="Enter manager" name="manager"></div>
+            </div>
+          </div>
+          <div class="panel-footer">
+            <div class="col-lg-offset-11"><button type="submit" class="btn btn-default">검색</button></div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-2">
+    <h4>Total:<span class="badge">{{len .overallStates}}</span></h4>
+  </div>
+  <div class="col-lg-10" style="position:relative;text-align:right;">
+    <td><button type="button" class="btn btn-info btn-xs">데이터 추출</button></td>
+  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>No.</th>
+        <th>호스트</th>
+        <th>전원</th>
+        <th>상태</th>
+        <th>팬</th>
+        <th>온도</th>
+        <th>전원공급</th>
+        <th>네트워크</th>
+        <th>디스크</th>
+        <th>상세보기</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{if .overallStates}}
+      {{range $i, $overallState := .overallStates}}
+      {{if eq $overallState.State "OK"}}
+      <tr>
+        {{else}}
+        <tr style="background-color:yellow;">
+          {{end}}
+          <td>{{$overallState.MonitorId}}</td>
+          <td>{{$overallState.Host}}</td>
+          <td>
+            <form action="{{url "App.ControlServer" $overallState.Host $overallState.Power}}" method="GET">
+              {{if eq $overallState.Power "On"}}
+              <button type="submit" class="btn btn-success btn-xs">{{$overallState.Power}}</button>
+              {{else}}
+              <button type="submit" class="btn btn-danger btn-xs">{{$overallState.Power}}</button>
+              {{end}}
+            </form>
+          </td>
+          <!-- data-toggle="modal" data-target="#myModal">{{$overallState.Power}}</button></td>
+    </form>
+    -->
+    <td>{{$overallState.State}}</td>
+    <td>{{$overallState.Fan}}</td>
+    <td>{{$overallState.Temperature}}</td>
+    <td>{{$overallState.PowerSupply}}</td>
+    <td>{{$overallState.Network}}</td>
+    <td>{{$overallState.Disk}}</td>
+    <td>
+      <a href="{{url "Detail.System" $overallState.MonitorId}}" target="_blank" type="button" class="btn btn-default btn-xs">Show</a>
+    </td>
+  </tr>
+  {{end}}
+  {{end}}
+</tbody>
+</table>
+
+<!-- <script> -->
+  <!--   function newWindow() { -->
+<!--     window.open("details.html",width=600,height=300); -->
+<!--   } -->
+<!-- </script> -->
+
+<div style="position:relative;text-align:center;">
+  <ul class="pagination">
+      {{range .page}}
+      <li><a href="/page/{{.}}">{{.}}</a></li>
+      {{end}}
+  </ul>
+</div>
+
+  <!-- /.container -->
+
+  {{template "footer.html" .}}

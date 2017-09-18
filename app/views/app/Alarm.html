@@ -1,0 +1,126 @@
+{{template "header.html" .}}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Page Content -->
+<div class="container">
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" href="#collapse1">알림 등록 & 검색</a>
+        </h4>
+      </div>
+      <div id="collapse1" class="panel-collapse collapse">
+        <form class="form-horizontal">
+          <div class="panel-body">
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="alarm.Host">호스트 : </label>
+              <div class="col-sm-4"><input type="text" class="form-control" id="alarm.Host" name="alarm.Host"></div>
+              <label class="control-label col-sm-2" for="alarm.Phone">전화번호 : </label>
+              <div class="col-sm-4"><input type="text" class="form-control" id="alarm.Phone" name="alarm.UserPhone"></div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="alarm.Service">서비스 : </label>
+              <div class="col-sm-4">
+                <select class="form-control" id="alarm.Service" name="alarm.Service">
+                  <option>Select</option>
+                  <option>Tman</option>
+                  <option>Tview</option>
+                </select>
+              </div>
+
+              <label class="control-label col-sm-2" for="alarm.UserName">이름 : </label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" id="alarm.UserName" name="alarm.UserName">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="alarm">알림항목 : </label>
+              <div class="col-sm-4">
+                <div class="checkbox">
+                  <label><input type="checkbox" value="true" id="alarm" name="alarm.Power" checked="checked">전원</label>
+                  <label><input type="checkbox" value="true" id="alarm" name="alarm.Thermal" checked="checked">온도</label>
+                  <label><input type="checkbox" value="true" id="alarm" name="alarm.Fan" checked="checked">팬</label>
+                  <label><input type="checkbox" value="true" id="alarm" name="alarm.Network" checked="checked">네트워크</label>
+                  <label><input type="checkbox" value="true" id="alarm" name="alarm.Disk" checked="checked">디스크</label>
+                </div>
+              </div>
+            </div>
+            <div class="panel-footer" align="right">
+              <button formaction="{{url "App.AddAlarm"}}" formmethod="POST" type="submit" class="btn btn-primary" style="float: rigth">등록</button>
+              <button formaction="{{url "App.Alarm"}}" formmethod="GET" type="submit" class="btn btn-primary" name="serch">검색</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- board -->
+    <div class="container">
+      <table class="table table-hover" id="tbl">
+        <thead >
+          <tr>
+            <th>No.</th>
+            <th>호스트</th>
+            <th>담당자</th>
+            <th>서비스</th>
+            <th>전화번호</th>
+            <th>전원</th>
+            <th>온도</th>
+            <th>팬</th>
+            <th>네트워크</th>
+            <th>디스크</th>
+            <th>설정</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{if .alarms}}
+          {{range $i, $alarm := .alarms}}
+          <tr>
+            <td>{{$i}}</td>
+            <td>{{$alarm.Host}}</td>
+            <td>{{$alarm.UserName}}</td>
+            <td>{{$alarm.Service}}</td>
+            <td>{{$alarm.UserPhone}}</td>
+            <td>{{if $alarm.Power}}O{{end}}</td>
+            <td>{{if $alarm.Thermal}}O{{end}} </td>
+            <td>{{if $alarm.Fan}}O{{end}}</td>
+            <td>{{if $alarm.Network}}O{{end}}</td>
+            <td>{{if $alarm.Disk}}O{{end}}</td>
+            <td>
+              <div class="col-sm-2">
+                <form action="{{url "App.UpdateAlarmWeb" $alarm.Id}}" method="GET">
+                  <button type="submit" class="btn btn-default btn-xs">수정</button>
+                </form>
+              </div>
+              <div class="col-sm-2">
+                <form action="{{url "App.DelAlarm" $alarm.Id}}" method="GET">
+                  <button type="submit" class="btn btn-default btn-xs">삭제</button>
+                </form>
+              </div>
+            </td>
+          </tr>
+          {{end}}
+          {{end}}
+
+        </tbody>
+      </table>
+    </div>
+    <!-- board end -->
+
+    <!--     <div class="row" align="center"> -->
+      <!--       <div class="col-sm-12" > -->
+        <!--         <ul class="pagination" > -->
+          <!--           <li><a href="#">1</a></li> -->
+          <!--           <li><a href="#">2</a></li> -->
+          <!--           <li><a href="#">3</a></li> -->
+          <!--           <li><a href="#">4</a></li> -->
+          <!--           <li><a href="#">5</a></li> -->
+          <!--         </ul> -->
+        <!--       </div> -->
+      <!--     </div> -->
+
+  </div>
+  <!-- /.container -->
+
+  {{template "footer.html" .}}

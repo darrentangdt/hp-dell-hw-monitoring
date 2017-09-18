@@ -1,0 +1,67 @@
+{{template "header.html" .}}
+
+<!-- Page Content -->
+<div class="container">
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" href="#collapse1">알람이력 검색</a>
+        </h4>
+      </div>
+      <div id="collapse1" class="panel-collapse collapse">
+        <form class="form-horizontal" action="{{url "App.AlarmLogView"}}" method="GET">
+          <div class="panel-body">
+            <div class="form-group">
+              <label class="control-label col-lg-2" for="alarmlog.MonitorHost">호스트 :</label>
+              <div class="col-lg-4"><input type="text" class="form-control" placeholder="Enter ip" name="alarmlog.MonitorHost"></div>
+              <label class="control-label col-lg-2" for="alarmlog.Component">Component :</label>
+              <div class="col-lg-4"><input type="text" class="form-control" placeholder="Enter Component" name="alarmlog.Component"></div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-lg-2" for="alarmlog.Describe">내용 :</label>
+              <div class="col-lg-4"><input type="text" class="form-control" placeholder="Enter log" name="alarmlog.Describe"></div>
+              <label class="control-label col-lg-2" for="alarmlog.CreatedAt">생성시간 :</label>
+              <div class="col-lg-4"><input type="text" class="form-control" placeholder="Enter time" name="alarmlog.CreatedAt"></div>
+            </div>
+          </div>
+          <div class="panel-footer">
+            <div class="col-lg-offset-11"><button type="submit" class="btn btn-default">검색</button></div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-2">
+    <h4>Total:<span class="badge">{{len .alarmlogs}}</span></h4>
+  </div>
+  <div class="col-lg-10" style="position:relative;text-align:right;">
+    <td><button type="button" class="btn btn-info btn-xs">데이터 추출</button></td>
+  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>No.</th>
+        <th>호스트</th>
+        <th>Component</th>
+        <th>상세정보</th>
+        <th>생성날짜</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{if .alarmlogs}}
+      {{range $i, $alarmlog := .alarmlogs}}
+      <tr>
+      <td>{{$i}}</td>
+      <td>{{$alarmlog.MonitorHost}}</td>
+      <td>{{$alarmlog.Component}}</td>
+      <td>{{$alarmlog.Describe}}</td>
+      <td>{{$alarmlog.CreatedAt}}</td>
+      </tr>
+      {{end}}
+      {{end}}
+    </tbody>
+  </table>
+</div>
+<!-- /.container -->
+{{template "footer.html" .}}

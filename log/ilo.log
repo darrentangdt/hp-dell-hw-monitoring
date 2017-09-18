@@ -1,0 +1,27 @@
+ERROR 2017/07/29 20:37:38 # tms/app/controllers
+./http.go:75: too many arguments to return
+	have (error)
+	want ()
+./http.go:83: too many arguments to return
+	have (error)
+	want ()
+
+ERROR 2017/07/29 20:38:57 Route validation error (in /home/jinyong/go/src/tms/conf/routes:16): revel/controller: failed to find action cotrolserver
+ERROR 2017/07/29 20:38:57 Error running: exit status 2
+ERROR 2017/07/30 20:23:55 # tms/app/controllers
+./app.go:39: undefined: query
+./controlHost.go:17: undefined: url
+
+ERROR 2017/07/30 20:25:34 # tms/app/controllers
+./controlHost.go:17: undefined: url
+
+ERROR 2017/07/30 20:26:43 Route validation error (in /home/jinyong/go/src/tms/conf/routes:16): revel/controller: failed to find action cotrolserver
+ERROR 2017/07/30 20:26:43 Error running: exit status 2
+ERROR 2017/07/30 20:29:21 Route validation error (in /home/jinyong/go/src/tms/conf/routes:16): revel/controller: failed to find action cotrolserver
+ERROR 2017/07/30 20:29:21 Error running: exit status 2
+ERROR 2017/07/30 20:31:28 Route validation error (in /home/jinyong/go/src/tms/conf/routes:16): revel/controller: failed to find action cotrolserver
+ERROR 2017/07/30 20:31:28 Error running: exit status 2
+ERROR 2017/07/30 20:33:14 Route validation error (in /home/jinyong/go/src/tms/conf/routes:16): revel/controller: failed to find action cotrolserverabc
+ERROR 2017/07/30 20:33:14 Error running: exit status 2
+ERROR 2017/07/30 20:34:41 Route validation error (in /home/jinyong/go/src/tms/conf/routes:16): revel/controller: failed to find action cotrolserver
+ERROR 2017/07/30 20:34:41 Error running: exit status 2

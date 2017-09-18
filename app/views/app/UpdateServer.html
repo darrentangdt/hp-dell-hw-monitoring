@@ -1,0 +1,66 @@
+{{template "header.html" .}}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Page Content -->
+<div class="container">
+  <!-- /.container -->
+  <div>
+    <div class="form-group row">
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-6">
+        <!-- body start -->
+        <form class="form-horizontal" action="{{url "App.UpdateSubmit"}}" method="POST">
+          <div class="form-group">
+            <label class="control-label col-md-3" for="HOST">HOST : </label>
+            <div class="col-md-8"><input class="form-control" id="HOST" type="text" value="{{.monitor.HostName}}" name="monitor.HostName"></div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-3" for="ip">IP : </label>
+            <div class="col-md-8"><input class="form-control" id="ip" type="text" value="{{.monitor.Host}}" name="monitor.Host"></div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-3" for="id">인증ID : </label> 
+            <div class="col-md-8"><input class="form-control" id="id" type="text" value="{{.monitor.MonitorName}}" name="monitor.MonitorName"></div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-3" for="pass">인증Pass : </label>
+            <div class="col-md-8"><input class="form-control" id="pass" type="text" value="{{.monitor.MonitorPass}}" name="monitor.MonitorPass"></div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-3" for="service">서비스 : </label>
+            <div class="col-md-8">
+              <select class="form-control" id="service" name="monitor.Service">
+                <option>{{.monitor.Service}}</option>
+                <option>Tman</option>
+                <option>Tview</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-3" for="manager">담당자 : </label>
+            <div class="col-md-8"><input class="form-control" id="manager" type="text" value="{{.monitor.Manager}}" name="monitor.Manager"></div>
+          </div>
+          <input name="monitor.Id" value="{{.monitor.Id}}" hidden>
+          <input name="monitor.Manuf" value="{{.monitor.Manuf}}" hidden>
+          <input name="monitor.CreatedAt" value="{{.monitor.CreatedAt}}" hidden>
+          <div align="center">
+            <button type="submit" class="btn btn-default btn-md">수정</button>
+            <a href="/server"><button type="button" class="btn btn-default btn-md">취소</button></a>
+          </div>
+        </form>
+        <!-- body end -->
+      </div> 
+      <div class="col-md-3" >
+      </div>
+    </div> 
+  </div>
+</div>
+
+<!-- jQuery Version 1.11.1 -->
+<script src="../../../public/js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../../../public/js/bootstrap.min.js"></script>
+
+{{template "footer.html" .}}

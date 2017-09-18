@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>TMS Server Detail</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../public/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../public/css/simple-sidebar.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  </head>
+
+  <body>
+
+    <div id="wrapper">
+
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand">
+            <a href="{{url "Detail.System" .monitorId}}">
+              Server Detail
+            </a>
+          </li>
+          <li>
+            <a href="{{url "Detail.System" .monitorId}}" 
+              {{if eq .overallState.State "OK"}}
+              {{else}}
+              style="background-color:pink;"
+              {{end}}>System
+              </a>
+          </li>
+          <li>
+            <a href="{{url "Detail.Fan" .monitorId}}" 
+              {{if eq .overallState.Fan "OK"}}
+              {{else}}
+              style="background-color:pink;"
+              {{end}}>Fan</a>
+          </li>
+          <li>
+            <a href="{{url "Detail.Power" .monitorId}}" 
+              {{if eq .overallState.PowerSupply "OK"}}
+              {{else}}
+              style="background-color:pink;"
+              {{end}}>PowerSupply</a>
+          </li>
+          <li>
+            <a href="{{url "Detail.Temperature" .monitorId}}" 
+              {{if eq .overallState.Temperature "OK"}}
+              {{else}}
+              style="background-color:pink;"
+              {{end}}>Temperature</a>
+          </li>
+          <li>
+            <a href="{{url "Detail.Network" .monitorId}}" 
+              {{if eq .overallState.Network "OK"}}
+              {{else if eq .overallState.Network "Ok"}}
+              {{else}}
+              style="background-color:pink;"
+              {{end}}>Network</a>
+          </li>
+          <li>
+            <a href="{{url "Detail.Storage" .monitorId}}" 
+              {{if eq .overallState.Disk "OK"}}
+              {{else}}
+              style="background-color:pink;"
+              {{end}}>Storage</a>
+          </li>
+          <li>
+            <a href="{{url "Detail.PowerControl" .monitorId}}" 
+              {{if eq .overallState.Power "On"}}
+              {{else}}
+              style="background-color:pink;"
+              {{end}}>PowerControl</a>
+          </li>
+        </ul>
+      </div>
+      <!-- /#sidebar-wrapper -->
+

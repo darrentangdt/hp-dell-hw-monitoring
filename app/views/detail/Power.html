@@ -1,0 +1,97 @@
+{{template "detailHeader.html" .}}
+
+<!-- Page Content -->
+<div id="page-content-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <table class="table table-hover">
+        {{if .hpPowers}}
+        <thead>
+          <tr>
+            <th>모델</th>
+            <th>이름</th>
+            <th>Bay 넘버</th>
+            <th>헬스</th>
+            <th>상태</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{range $power := .hpPowers}}
+          <tr>
+            <td>{{$power.Model}}</td>
+            <td>{{$power.Name}}</td>
+            <td>{{$power.BayNumber}}</td>
+            <td>
+              {{if eq $power.Health "OK"}}
+              <span class="label label-success">
+              {{else if eq $power.Health "Warning"}}
+              <span class="label label-warning">
+              {{else}}
+              <span class="label label-danger">
+              {{end}}
+              {{$power.Health}}
+              </span>
+            </td>
+            <td>
+              {{if eq $power.State "Enabled"}}
+              <span class="label label-success">
+              {{else}}
+              <span class="label label-danger">
+              {{end}}
+              {{$power.State}}
+              </span>
+            </td>
+          </tr>
+          {{end}}
+        </tbody>
+        {{else}}
+        <thead>
+          <tr>
+            <th>모델</th>
+            <th>슬롯</th>
+            <th>Part 넘버</th>
+            <th>헬스</th>
+            <th>상태</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{range $power := .dellPowers}}
+          <tr>
+            <td>{{$power.Model}}</td>
+            <td>{{$power.MemberID}}</td>
+            <td>{{$power.PartNumber}}</td>
+            <td>
+              {{if eq $power.Health "OK"}}
+              <span class="label label-success">
+              {{else if eq $power.Health "Warning"}}
+              <span class="label label-warning">
+              {{else}}
+              <span class="label label-danger">
+              {{end}}
+              {{$power.Health}}
+              </span>
+            </td>
+            <td>
+              {{if eq $power.State "Enabled"}}
+              <span class="label label-success">
+              {{else}}
+              <span class="label label-danger">
+              {{end}}
+              {{$power.State}}
+              </span>
+            </td>
+          </tr>
+          {{end}}
+        </tbody>
+        {{end}}
+
+      </table>
+    </div>
+  </div>
+</div>
+<!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+{{template "detailFooter.html" .}}

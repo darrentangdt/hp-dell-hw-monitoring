@@ -1,0 +1,101 @@
+{{template "detailHeader.html" .}}
+
+<!-- Page Content -->
+<div id="page-content-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <table class="table table-hover">
+        {{if .hpNetworks}}
+        <thead>
+          <tr>
+            <th>맥어드레스</th>
+            <th>전송속도</th>
+            <th>헬스</th>
+            <th>상태</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{range $network := .hpNetworks}}
+          <tr>
+            <td>{{$network.MacAddress}}</td>
+            <td>{{$network.SpeedMbps}}</td>
+            <td>
+              {{if eq $network.Health "OK"}}
+              <span class="label label-success">
+              {{else if eq $network.Health "Warning"}}
+              <span class="label label-warning">
+              {{else}}
+              <span class="label label-danger">
+              {{end}}
+              {{$network.Health}}
+              </span>
+            </td>
+            <td>
+              {{if eq $network.State "Enabled"}}
+              <span class="label label-success">
+              {{else}}
+              <span class="label label-danger">
+              {{end}}
+              {{$network.State}}
+              </span>
+            </td>
+          </tr>
+          {{end}}
+        </tbody>
+        {{else}}
+        <thead>
+          <tr>
+            <th>맥어드레스</th>
+            <th>IPv4</th>
+            <th>호스트이름</th>
+            <th>서버이름</th>
+            <th>전송속도</th>
+            <th>헬스</th>
+            <th>상태</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{range $network := .dellNetworks}}
+          <tr>
+            <td>{{$network.MacAddress}}</td>
+            <td>{{$network.IPv4Addresses}}</td>
+            <td>{{$network.HostName}}</td>
+            <td>{{$network.NameServers}}</td>
+            <td>{{$network.SpeedMbps}}</td>
+            <td>
+              {{if eq $network.Health "OK"}}
+              <span class="label label-success">
+              {{else if eq $network.Health "Ok"}}
+              <span class="label label-success">
+              {{else if eq $network.Health "Warning"}}
+              <span class="label label-warning">
+              {{else}}
+              <span class="label label-danger">
+              {{end}}
+              {{$network.Health}}
+              </span>
+            </td>
+            <td>
+              {{if eq $network.State "Enabled"}}
+              <span class="label label-success">
+              {{else}}
+              <span class="label label-danger">
+              {{end}}
+              {{$network.State}}
+              </span>
+            </td>
+          </tr>
+          {{end}}
+        </tbody>
+        {{end}}
+
+      </table>
+    </div>
+  </div>
+</div>
+<!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+{{template "detailFooter.html" .}}

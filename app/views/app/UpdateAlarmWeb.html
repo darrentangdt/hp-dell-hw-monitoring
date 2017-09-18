@@ -1,0 +1,57 @@
+{{template "header.html" .}}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Page Content -->
+<div class="container">
+  <!-- /.container -->
+  <div>
+    <div class="form-group row">
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-6">
+        <!-- body start -->
+        <form class="form-horizontal" action="{{url "App.UpdateAlarmSubmit"}}" method="POST">
+          <div class="form-group">
+            <label class="control-label col-md-3" for="ip">IP : </label>
+            <div class="col-md-8"><input class="form-control" id="ip" type="text" value="{{.alarm.Host}}" name="alarm.Host"></div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-3" for="call">전화번호 : </label> 
+            <div class="col-md-8"><input class="form-control" id="call" type="text" value="{{.alarm.UserPhone}}" name="alarm.UserPhone"></div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-3" for="service">서비스 : </label>
+            <div class="col-md-8">
+              <select class="form-control" id="service" name="alarm.Service">
+                <option>{{.alarm.Service}}</option>
+                <option>Tman</option>
+                <option>Tview</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-3" for="userName">이름 : </label>
+            <div class="col-md-8"><input class="form-control" id="userName" type="text" value="{{.alarm.UserName}}" name="alarm.UserName"></div>
+          </div>
+          <input name="alarm.Id" value="{{.alarm.Id}}" hidden>
+          <input name="alarm.CreatedAt" value="{{.alarm.CreatedAt}}" hidden>
+          <div align="center">
+            <button type="submit" class="btn btn-default btn-md">수정</button>
+            <a href="/alarm"><button type="button" class="btn btn-default btn-md">취소</button></a>
+          </div>
+        </form>
+        <!-- body end -->
+      </div> 
+      <div class="col-md-3" >
+      </div>
+    </div> 
+  </div>
+</div>
+
+<!-- jQuery Version 1.11.1 -->
+<script src="../../../public/js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../../../public/js/bootstrap.min.js"></script>
+
+{{template "footer.html" .}}

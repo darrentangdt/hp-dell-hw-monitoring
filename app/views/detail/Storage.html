@@ -1,0 +1,106 @@
+{{template "detailHeader.html" .}}
+
+<!-- Page Content -->
+<div id="page-content-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <table class="table table-hover">
+        {{if .hpStorages}}
+        <thead>
+          <tr>
+            <th>시리얼넘버</th>
+            <th>모델</th>
+            <th>위치</th>
+            <th>위치 포맷</th>
+            <th>최대 허용 온도</th>
+            <th>현재 온도</th>
+            <th>인터페이스</th>
+            <th>용량 MB</th>
+            <th>헬스</th>
+            <th>상태</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{range $storage:= .hpStorages}}
+          <tr>
+            <td>{{$storage.SerialNumber}}</td>
+            <td>{{$storage.Model}}</td>
+            <td>{{$storage.Location}}</td>
+            <td>{{$storage.LocationFormat}}</td>
+            <td>{{$storage.MaximumTemperatureCelsius}}</td>
+            <td>{{$storage.CurrentTemperatureCelsius}}</td>
+            <td>{{$storage.InterfaceType}}</td>
+            <td>{{$storage.CapacityMiB}}</td>
+            <td>
+              {{if eq $storage.Health "OK"}}
+              <span class="label label-success">
+              {{else if eq $storage.Health "Warning"}}
+              <span class="label label-warning">
+              {{else}}
+              <span class="label label-danger">
+              {{end}}
+              {{$storage.Health}}
+              </span>
+            </td>
+            <td>
+              {{if eq $storage.State "Enabled"}}
+              <span class="label label-success">
+              {{else}}
+              <span class="label label-danger">
+              {{end}}
+              {{$storage.State}}
+              </span>
+            </td>
+          </tr>
+          {{end}}
+        </tbody>
+        {{else}}
+        <thead>
+          <tr>
+            <th>제조사</th>
+            <th>모델</th>
+            <th>위치</th>
+            <th>헬스</th>
+            <th>상태</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{range $storage:= .dellStorages}}
+          <tr>
+            <td>{{$storage.Manufacturer}}</td>
+            <td>{{$storage.Model}}</td>
+            <td>{{$storage.Name}}</td>
+            <td>
+              {{if eq $storage.Health "OK"}}
+              <span class="label label-success">
+              {{else if eq $storage.Health "Warning"}}
+              <span class="label label-warning">
+              {{else}}
+              <span class="label label-danger">
+              {{end}}
+              {{$storage.Health}}
+              </span>
+            </td>
+            <td>
+              {{if eq $storage.State "Enabled"}}
+              <span class="label label-success">
+              {{else}}
+              <span class="label label-danger">
+              {{end}}
+              {{$storage.State}}
+              </span>
+            </td>
+          </tr>
+          {{end}}
+        </tbody>
+        {{end}}
+
+      </table>
+    </div>
+  </div>
+</div>
+<!-- /#page-content-wrapper -->
+
+<!-- /#wrapper -->
+
+{{template "detailFooter.html" .}}
